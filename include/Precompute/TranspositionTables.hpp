@@ -7,9 +7,7 @@
 
 #pragma once
 
-#include <bitset>
 #include <cstdint>
-#include <tuple>
 #include <vector>
 
 const std::vector<uint16_t> TRANSPOTITION_0 = {
@@ -111,7 +109,3 @@ const std::vector<uint16_t> TRANSPOTITION_135 {
     158, 137, 116, 95, 74, 53, 32, 11, 159, 138, 117, 96, 75, 54, 33, 12, 139, 118, 97, 76, 55,
     34, 13, 119, 98, 77, 56, 35, 14, 99, 78, 57, 36, 15, 79, 58, 37, 16, 59, 38, 17, 39, 18, 19
 };
-
-const std::bitset<400> WIN_MASK = {0b11111};
-
-

@@ -1,12 +1,9 @@
-#include <bitset>
-#include <cstddef>
 #include <cstdint>
 #include <iostream>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
-#include <utility>
 #include <vector>
 #include <chrono>
 
@@ -14,36 +11,8 @@
 #include "Brain.hpp"
 #include "MinMax.hpp"
 #include "Type.hpp"
-
-class ParsingError : public std::exception {
-    public:
-        ParsingError(std::string  message) : m_message(std::move(message)) {}
-
-        [[nodiscard]] const char* what() const noexcept override {
-            return m_message.c_str();
-        }
-
-    private:
-        std::string m_message;
-};
-
-std::vector<std::string> strToWordArray(const std::string& str) {
-    std::vector<std::string> words;
-    std::string word;
-    std::istringstream stream(str);
-
-    while (std::getline(stream, word, ' ')) {
-        std::istringstream wordStream(word);
-        std::string subWord;
-        while (std::getline(wordStream, subWord, ',')) {
-            if (!subWord.empty()) {
-                words.push_back(subWord);
-            }
-        }
-    }
-
-    return words;
-}
+#include "Errors.hpp"
+#include "Utils.hpp"
 
 void Brain::run() {
     std::string line;
@@ -103,21 +72,6 @@ void Brain::playMove() {
             std::cout << "DEBUG Choice made between " << moves.size() << " moves available" << std::endl; 
             break;
         }
-/*
-        // Iterative deepening
-        std::vector<std::tuple<uint16_t, double>> prevMoveScore = std::get<0>(newMove);
-
-        std::sort(prevMoveScore.begin(), prevMoveScore.end(),
-          [](const std::tuple<uint16_t, double>& a, const std::tuple<uint16_t, double>& b) {
-              return std::get<1>(a) < std::get<1>(b);
-          });
-
-        // Extract the uint16_t values from vector1 into vector2
-        moves.clear();
-        for (const auto& elem : prevMoveScore) {
-            moves.push_back(std::get<0>(elem));
-        }
-*/
     }
 
     std::cout << bestMove / BOARD_SIZE << "," << bestMove % BOARD_SIZE << std::endl;

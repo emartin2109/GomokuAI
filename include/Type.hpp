@@ -13,10 +13,6 @@
 #include <vector>
 
 #define BOARD_SIZE 20
-#define WIN_COUNT 5
-
-#define AUTO_DEPTH -1
-#define NO_MAT_FOUND -1
 
 #define PATERN_NBR 20
 #define DEFENSIVENESS 2.0
