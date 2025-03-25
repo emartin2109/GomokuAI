@@ -8,7 +8,7 @@
 CXX = g++
 CXXFLAGS = -W -Wall -Wextra -Wpedantic -I./include -Ofast -O3 -ffast-math
 SRC_DIR = src
-TARGET = pbrain-gomoku-ai
+TARGET = pbrain-gomoku-ai.exe
 
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
