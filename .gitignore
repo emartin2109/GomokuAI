@@ -1,5 +1,6 @@
 *.o
 pbrain-gomoku-ai
+pbrain-gomoku-ai.exe
 piskvork
 piskvork.zip
 .vscode

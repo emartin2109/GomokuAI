@@ -24,7 +24,6 @@
 #include <vector>
 
 #include "Type.hpp"
-#include "Precompute/TranspositionTables.hpp"
 #include "Precompute/SquareLimit.hpp"
 
 class Board {

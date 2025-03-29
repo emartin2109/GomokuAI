@@ -6,6 +6,7 @@
 */
 
 #include "Board.hpp"
+#include "Precompute/TranspositionTables.hpp"
 
 Board::Board(std::bitset<400> &board, std::bitset<400> &opBoard, std::bitset<400> threads, std::bitset<400> opThreads) :
     bitboardSelf(board), bitboardOpponent(opBoard),
@@ -50,7 +51,7 @@ Board::Board(std::bitset<400> &board, std::bitset<400> &opBoard, std::bitset<400
         for (uint16_t i = 0; i < 400; i++)
             if (!both[i] && activationZone[i] > 0) playablesMoves.push_back(i);
 
-    return playablesMoves; 
+    return playablesMoves;
 }
 
 GameState Board::isGameWon() {
@@ -290,7 +291,7 @@ bool Board::checkForThreatPatern(const std::bitset<400> &boardSelf, const std::b
                     potForced.clear();
                     break;
                 }
-                QO--; 
+                QO--;
                 potForced.push_back(trans[startPos + i]);
             }
 

@@ -4,7 +4,7 @@
 
 class SquareLimit {
     public:
-        SquareLimit(size_t boardSize, int squareIndex) : 
+        SquareLimit(size_t boardSize, int squareIndex) :
             lowerXLimit(squareIndex - squareIndex % 20), upperXLimit(((squareIndex + boardSize) - (squareIndex + boardSize) % 20) - 1),
             lowerYLimit(squareIndex % 20), upperYLimit((boardSize * (boardSize - 1)) + (squareIndex % boardSize)) {
 
@@ -16,7 +16,7 @@ class SquareLimit {
         }
 
         SquareLimit() = default;
-    
+
     public:
         int lowerXLimit = 0;
         int upperXLimit = 0;

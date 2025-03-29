@@ -64,12 +64,12 @@ void Brain::playMove() {
             posEval = m_board.evalNbr;
             if (std::get<2>(newMove)) {
                 std::cout << "DEBUG Move found at depth " << i << ", " << posEval << " positions evaluated" << std::endl;
-                std::cout << "DEBUG Choice made between " << moves.size() << " moves available" << std::endl; 
+                std::cout << "DEBUG Choice made between " << moves.size() << " moves available" << std::endl;
                 break;
             }
         } else {
             std::cout << "DEBUG Move found at depth " << i - 1 << ", " << posEval << " positions evaluated" << std::endl;
-            std::cout << "DEBUG Choice made between " << moves.size() << " moves available" << std::endl; 
+            std::cout << "DEBUG Choice made between " << moves.size() << " moves available" << std::endl;
             break;
         }
     }
