@@ -17,6 +17,13 @@
 #include "define/typedef.hpp"
 #include "precomputed/values.hpp"
 
+const std::array<int,4> DIRECTIONS_VECTORS = {
+    1,                      // 0° vector
+    BOARD_LENGTH - 1,       // 45° vector
+    BOARD_LENGTH,           // 90° vector
+    BOARD_LENGTH + 1        // 135° vector
+};
+
 // WARNING ! This function does not work for board size of 1 or 2
 /**
  * @brief check if a given bit index in the bitboard is valid compare to the previous one
@@ -32,7 +39,7 @@ bool isBitIndexValid(size_t bitIndex, size_t previousRow, size_t previousCol) {
     size_t currentCol = bitIndex % BOARD_LENGTH;
 
     if (bitIndex >= BOARD_SIZE) return false;
-    if (abs(previousRow - currentRow) > 1 || abs(previousCol - currentCol) > 1) return false;
+    if (abs(int(previousRow) - int(currentRow)) > 1 || abs(int(previousCol) - int(currentCol)) > 1) return false;
 
     return true;
 }
@@ -81,13 +88,13 @@ bitboard buildRayMask(size_t bitIndex, int increment) {
  * @param index the index of the square that should be computed 
  * @return std::array<bitboard, 4> an array containing all four computed rayMasks
  */
-std::array<bitboard, 4> computeRaysFromSquare(size_t index) {   
-    bitboard lineMask = buildRayMask(index, 1);
-    bitboard diag45Mask = buildRayMask(index, BOARD_LENGTH - 1);
-    bitboard columnMask = buildRayMask(index, BOARD_LENGTH);
-    bitboard diag135Mask = buildRayMask(index, BOARD_LENGTH + 1);
+std::array<bitboard, 4> computeRaysFromSquare(size_t index) {  
+    std::array<bitboard, 4> rays;
+    
+    for (int d = 0; d < 4; d++)
+        rays[d] = buildRayMask(index, DIRECTIONS_VECTORS[d]);
 
-    return std::array<bitboard, 4>{lineMask, diag45Mask, columnMask, diag135Mask};
+    return rays;
 }
 
 /**
