@@ -1,2 +1,9 @@
 *.o
 pbrain-gomoku-ai
+.qodo
+
+# cmake cache
+cmake
+CMakeFiles
+cmake_install.cmake
+CMakeCache.txt

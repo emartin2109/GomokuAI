@@ -27,8 +27,6 @@ clean:
 fclean: clean
 	rm -f $(TARGET)
 
-tests:
-	cmake -S . -Bbuild -G "Unix Makefiles" -DBUILD_TESTS=ON && cmake --build build --target pbrain-gomoku-ai-tests
 
 re: fclean all
 

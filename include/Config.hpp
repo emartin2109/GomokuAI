@@ -1,0 +1,1 @@
+#define BOARD_SIZE 400
