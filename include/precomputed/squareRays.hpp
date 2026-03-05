@@ -11,14 +11,8 @@
 
 #pragma once
 
-#include <bitset>
 #include <cstdint>
-#include <tuple>
-#include <vector>
 #include <array>
-#include <unordered_map>
-#include <algorithm>
-#include <iostream>
 
 #include "define/typedef.hpp"
 #include "precomputed/values.hpp"
@@ -50,7 +44,7 @@ bool isBitIndexValid(size_t bitIndex, size_t previousRow, size_t previousCol) {
  * @param bitIndex the index of the first bit
  * @param increment the directional vector that should be computed
  */
-void buildDirectionMask(bitboard &directionMask, size_t bitIndex, size_t increment) {
+void buildDirectionMask(bitboard &directionMask, size_t bitIndex, int increment) {
     size_t previousRow = bitIndex / BOARD_LENGTH;
     size_t previousCol = bitIndex % BOARD_LENGTH;
     size_t nextBitIndex = bitIndex + increment;
@@ -71,7 +65,7 @@ void buildDirectionMask(bitboard &directionMask, size_t bitIndex, size_t increme
  * @param increment the directional vector that will be computed alongside its inverse vector
  * @return bitboard the computed rayMask
  */
-bitboard buildRayMask(size_t bitIndex, size_t increment) {
+bitboard buildRayMask(size_t bitIndex, int increment) {
     bitboard rayMask = 0;
 
     rayMask.set(bitIndex);
@@ -110,4 +104,4 @@ std::array<std::array<bitboard, 4>, BOARD_SIZE> buildSquareRayLookup() {
     return squareRays;
 }
 
-std::array<std::array<bitboard, 4>, BOARD_SIZE> SQUARE_RAYS = buildSquareRayLookup();
+inline const std::array<std::array<bitboard, 4>, BOARD_SIZE> SQUARE_RAYS = buildSquareRayLookup();
