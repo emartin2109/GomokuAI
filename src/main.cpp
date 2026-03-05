@@ -1,4 +1,4 @@
-#include "precomputed/transpositions.hpp"
+#include "precomputed/squareRays.hpp"
 #include "utils/bitboard.hpp"
 #include "define/define.hpp"
 

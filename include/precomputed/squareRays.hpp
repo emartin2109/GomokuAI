@@ -1,3 +1,14 @@
+/**
+ * @file squareRays.hpp
+ * @author eliot.martin33@gmail.com
+ * @brief file use to compute a lookup table that allow quick access to affected squares for any played moves
+ * @version 0.1
+ * @date 2026-03-05
+ * 
+ * @copyright Copyright (c) 2026
+ * 
+ */
+
 #pragma once
 
 #include <bitset>
@@ -13,6 +24,15 @@
 #include "precomputed/values.hpp"
 
 // WARNING ! This function does not work for board size of 1 or 2
+/**
+ * @brief check if a given bit index in the bitboard is valid compare to the previous one
+ * 
+ * @param bitIndex the index to check in the bitboard
+ * @param previousRow the row of the previous bitIndex
+ * @param previousCol the column of the previous bitIndex
+ * @return true 
+ * @return false 
+ */
 bool isBitIndexValid(size_t bitIndex, size_t previousRow, size_t previousCol) {
     size_t currentRow = bitIndex / BOARD_LENGTH;
     size_t currentCol = bitIndex % BOARD_LENGTH;
@@ -23,6 +43,13 @@ bool isBitIndexValid(size_t bitIndex, size_t previousRow, size_t previousCol) {
     return true;
 }
 
+/**
+ * @brief complete a directional mask, the directional mask shall not extend more than 4 square in each directions
+ * 
+ * @param directionMask the directional mask to complete
+ * @param bitIndex the index of the first bit
+ * @param increment the directional vector that should be computed
+ */
 void buildDirectionMask(bitboard &directionMask, size_t bitIndex, size_t increment) {
     size_t previousRow = bitIndex / BOARD_LENGTH;
     size_t previousCol = bitIndex % BOARD_LENGTH;
@@ -37,6 +64,13 @@ void buildDirectionMask(bitboard &directionMask, size_t bitIndex, size_t increme
     }
 }
 
+/**
+ * @brief create a rayMask that extant in both directions of a given vector
+ * 
+ * @param bitIndex the starting point of the ray mask
+ * @param increment the directional vector that will be computed alongside its inverse vector
+ * @return bitboard the computed rayMask
+ */
 bitboard buildRayMask(size_t bitIndex, size_t increment) {
     bitboard rayMask = 0;
 
@@ -47,6 +81,12 @@ bitboard buildRayMask(size_t bitIndex, size_t increment) {
     return rayMask;
 }
 
+/**
+ * @brief compute all four rayMasks for a given square
+ * 
+ * @param index the index of the square that should be computed 
+ * @return std::array<bitboard, 4> an array containing all four computed rayMasks
+ */
 std::array<bitboard, 4> computeRaysFromSquare(size_t index) {   
     bitboard lineMask = buildRayMask(index, 1);
     bitboard diag45Mask = buildRayMask(index, BOARD_LENGTH - 1);
@@ -56,6 +96,11 @@ std::array<bitboard, 4> computeRaysFromSquare(size_t index) {
     return std::array<bitboard, 4>{lineMask, diag45Mask, columnMask, diag135Mask};
 }
 
+/**
+ * @brief build the lookup table of rayMasks for each squares on the board
+ * 
+ * @return std::array<std::array<bitboard, 4>, BOARD_SIZE> lookup table of rayMasks for each squares on the board
+ */
 std::array<std::array<bitboard, 4>, BOARD_SIZE> buildSquareRayLookup() {
     std::array<std::array<bitboard, 4>, BOARD_SIZE> squareRays;
 
