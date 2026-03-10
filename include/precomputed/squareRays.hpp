@@ -1,14 +1,3 @@
-/**
- * @file squareRays.hpp
- * @author eliot.martin33@gmail.com
- * @brief file use to compute a lookup table that allow quick access to affected squares for any played moves
- * @version 0.1
- * @date 2026-03-05
- * 
- * @copyright Copyright (c) 2026
- * 
- */
-
 #pragma once
 
 #include <cstdint>
@@ -17,7 +6,7 @@
 #include "define/typedef.hpp"
 #include "precomputed/values.hpp"
 
-const std::array<int,4> DIRECTIONS_VECTORS = {
+const std::array<int, 4> DIRECTIONS_VECTORS = {
     1,                      // 0° vector
     BOARD_LENGTH - 1,       // 45° vector
     BOARD_LENGTH,           // 90° vector

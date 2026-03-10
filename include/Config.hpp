@@ -1,1 +1,1 @@
-#define BOARD_SIZE 400
+#define BOARD_SIZE 25
