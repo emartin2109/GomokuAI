@@ -1,3 +1,5 @@
+Current supported board size: 5x5 to 255x255 (with enough stack space)
+
 # Gomoku AI Project
 
 Welcome to the repository for our **Gomoku AI Project**, a team effort by two Epitech students. This project was completed within a two-week timeline as part of our school curriculum, and the primary goal was to develop the most effective Gomoku AI possible.

@@ -1,21 +1,35 @@
-#include "precomputed/squareRays.hpp"
 #include "utils/bitboard.hpp"
+#include "utils/linearization.hpp"
 #include "define/define.hpp"
-#include "precomputed/threatPaterns/opponent.hpp"
+#include "precomputed/linearizationTables.hpp"
 
 #include <iostream>
 
+// 17043521
+
+/*
+10000
+01000
+00100
+00010
+00001
+*/
+
+/*
+10000
+00000
+00000
+00000
+00000
+*/
+
 int main () {
-    std::cout << LINE_SPLIT_MASK[33] << std::endl;
+    bitboard b(1118480);
 
-    /*
-    std::array<bitboard, 4> bitboards = SQUARE_RAYS[210];
-    bitboardPrinter(bitboards[TRANSPOSE0] & bitboards[TRANSPOSE45] & bitboards[TRANSPOSE90] & bitboards[TRANSPOSE135]);
-    bitboardPrinter(bitboards[TRANSPOSE0] ^ bitboards[TRANSPOSE45] ^ bitboards[TRANSPOSE90] ^ bitboards[TRANSPOSE135]);
+    bitboardPrinter(b);
 
-    bitboardPrinter(bitboards[TRANSPOSE0]);
-    bitboardPrinter(bitboards[TRANSPOSE45]);
-    bitboardPrinter(bitboards[TRANSPOSE90]);
-    bitboardPrinter(bitboards[TRANSPOSE135]);
-    */
+    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[COLUMN], LinearizationOperation::TRANSPOSE));
+    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[MAIN_DIAG], LinearizationOperation::TRANSPOSE));
+    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[ANTI_DIAG], LinearizationOperation::TRANSPOSE));
+
 }

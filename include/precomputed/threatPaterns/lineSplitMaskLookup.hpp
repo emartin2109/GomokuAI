@@ -6,7 +6,6 @@
 #include <cmath>
 #include <iostream>
 
-
 std::array<threat_patern, 512> buildLineSplitMaskLookup() {
     std::array<threat_patern, 512> lineSplitMask;
 
