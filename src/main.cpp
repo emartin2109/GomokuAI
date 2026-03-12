@@ -2,6 +2,7 @@
 #include "utils/linearization.hpp"
 #include "precomputed/linearizationTables.hpp"
 #include "precomputed/squareRaysLookup.hpp"
+#include "precomputed/basicMasks/proximityMask.hpp"
 
 #include <iostream>
 
@@ -26,15 +27,21 @@
 int main () {
     bitboard b(65536);
 
-    bitboardPrinter(b);
-//    bitboardPrinter(SQUARE_RAYS[16][RayDirection::ROW]);
+    for (size_t i = 0; i < BOARD_SIZE; i++) {
+        bitboardPrinter(PROXIMITY_MASK[i]);
+    }
+    /*
+
+//    bitboardPrinter(b);
+    bitboardPrinter(SQUARE_RAYS[16][RayDirection::ROW]);
 
 //    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[COLUMN], LinearizationOperation::TRANSPOSE));
-//    bitboardPrinter(SQUARE_RAYS[16][RayDirection::COLUMN]);
+    bitboardPrinter(linearizeBitboard(SQUARE_RAYS[16][RayDirection::COLUMN], LINEARIZATION_TABLES[COLUMN], LinearizationOperation::RESTORE));
 
 //    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[MAIN_DIAG], LinearizationOperation::TRANSPOSE));
-//    bitboardPrinter(SQUARE_RAYS[16][RayDirection::MAIN_DIAG]);
+    bitboardPrinter(linearizeBitboard(SQUARE_RAYS[16][RayDirection::MAIN_DIAG], LINEARIZATION_TABLES[MAIN_DIAG], LinearizationOperation::RESTORE));
 
 //    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[ANTI_DIAG], LinearizationOperation::TRANSPOSE));
-//    bitboardPrinter(SQUARE_RAYS[16][RayDirection::ANTI_DIAG]);
-}
+    bitboardPrinter(linearizeBitboard(SQUARE_RAYS[16][RayDirection::ANTI_DIAG], LINEARIZATION_TABLES[ANTI_DIAG], LinearizationOperation::RESTORE));
+    */
+    }
