@@ -1,7 +1,7 @@
 #include "utils/bitboard.hpp"
 #include "utils/linearization.hpp"
-#include "define/define.hpp"
 #include "precomputed/linearizationTables.hpp"
+#include "precomputed/squareRaysLookup.hpp"
 
 #include <iostream>
 
@@ -24,12 +24,17 @@
 */
 
 int main () {
-    bitboard b(1118480);
+    bitboard b(65536);
 
     bitboardPrinter(b);
+//    bitboardPrinter(SQUARE_RAYS[16][RayDirection::ROW]);
 
-    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[COLUMN], LinearizationOperation::TRANSPOSE));
-    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[MAIN_DIAG], LinearizationOperation::TRANSPOSE));
-    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[ANTI_DIAG], LinearizationOperation::TRANSPOSE));
+//    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[COLUMN], LinearizationOperation::TRANSPOSE));
+//    bitboardPrinter(SQUARE_RAYS[16][RayDirection::COLUMN]);
 
+//    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[MAIN_DIAG], LinearizationOperation::TRANSPOSE));
+//    bitboardPrinter(SQUARE_RAYS[16][RayDirection::MAIN_DIAG]);
+
+//    bitboardPrinter(linearizeBitboard(b, LINEARIZATION_TABLES[ANTI_DIAG], LinearizationOperation::TRANSPOSE));
+//    bitboardPrinter(SQUARE_RAYS[16][RayDirection::ANTI_DIAG]);
 }

@@ -5,24 +5,17 @@
 
 #include "define/typedef.hpp"
 #include "precomputed/values.hpp"
+#include "precomputed/linearizationTables.hpp"
+#include "utils/linearization.hpp"
 
 const std::array<int, 4> DIRECTIONS_VECTORS = {
-    1,                      // 0° vector
-    BOARD_LENGTH - 1,       // 45° vector
+    BOARD_LENGTH + 1,       // 45° vector
     BOARD_LENGTH,           // 90° vector
-    BOARD_LENGTH + 1        // 135° vector
+    BOARD_LENGTH - 1,       // 135° vector
+    1,                      // 0° vector
 };
 
 // WARNING ! This function does not work for board size of 1 or 2
-/**
- * @brief check if a given bit index in the bitboard is valid compare to the previous one
- * 
- * @param bitIndex the index to check in the bitboard
- * @param previousRow the row of the previous bitIndex
- * @param previousCol the column of the previous bitIndex
- * @return true 
- * @return false 
- */
 bool isBitIndexValid(size_t bitIndex, size_t previousRow, size_t previousCol) {
     size_t currentRow = bitIndex / BOARD_LENGTH;
     size_t currentCol = bitIndex % BOARD_LENGTH;
@@ -33,13 +26,6 @@ bool isBitIndexValid(size_t bitIndex, size_t previousRow, size_t previousCol) {
     return true;
 }
 
-/**
- * @brief complete a directional mask, the directional mask shall not extend more than 4 square in each directions
- * 
- * @param directionMask the directional mask to complete
- * @param bitIndex the index of the first bit
- * @param increment the directional vector that should be computed
- */
 void buildDirectionMask(bitboard &directionMask, size_t bitIndex, int increment) {
     size_t previousRow = bitIndex / BOARD_LENGTH;
     size_t previousCol = bitIndex % BOARD_LENGTH;
@@ -54,13 +40,6 @@ void buildDirectionMask(bitboard &directionMask, size_t bitIndex, int increment)
     }
 }
 
-/**
- * @brief create a rayMask that extant in both directions of a given vector
- * 
- * @param bitIndex the starting point of the ray mask
- * @param increment the directional vector that will be computed alongside its inverse vector
- * @return bitboard the computed rayMask
- */
 bitboard buildRayMask(size_t bitIndex, int increment) {
     bitboard rayMask = 0;
 
@@ -71,26 +50,23 @@ bitboard buildRayMask(size_t bitIndex, int increment) {
     return rayMask;
 }
 
-/**
- * @brief compute all four rayMasks for a given square
- * 
- * @param index the index of the square that should be computed 
- * @return std::array<bitboard, 4> an array containing all four computed rayMasks
- */
 std::array<bitboard, 4> computeRaysFromSquare(size_t index) {  
     std::array<bitboard, 4> rays;
-    
-    for (int d = 0; d < 4; d++)
-        rays[d] = buildRayMask(index, DIRECTIONS_VECTORS[d]);
+
+    rays[RayDirection::ROW] = buildRayMask(index, DIRECTIONS_VECTORS[ROW]);
+
+    rays[RayDirection::COLUMN] = linearizeBitboard(buildRayMask(index,
+        DIRECTIONS_VECTORS[COLUMN]), LINEARIZATION_TABLES[COLUMN], LinearizationOperation::TRANSPOSE);
+
+    rays[RayDirection::MAIN_DIAG] = linearizeBitboard(buildRayMask(index,
+        DIRECTIONS_VECTORS[MAIN_DIAG]), LINEARIZATION_TABLES[MAIN_DIAG], LinearizationOperation::TRANSPOSE);
+
+    rays[RayDirection::ANTI_DIAG] = linearizeBitboard(buildRayMask(index,
+        DIRECTIONS_VECTORS[ANTI_DIAG]), LINEARIZATION_TABLES[ANTI_DIAG], LinearizationOperation::TRANSPOSE);
 
     return rays;
 }
 
-/**
- * @brief build the lookup table of rayMasks for each squares on the board
- * 
- * @return std::array<std::array<bitboard, 4>, BOARD_SIZE> lookup table of rayMasks for each squares on the board
- */
 std::array<std::array<bitboard, 4>, BOARD_SIZE> buildSquareRayLookup() {
     std::array<std::array<bitboard, 4>, BOARD_SIZE> squareRays;
 

@@ -4,13 +4,8 @@
 
 #include "Config.hpp"
 #include "define/typedef.hpp"
+#include "define/enums.hpp"
 #include "precomputed/values.hpp"
-
-enum LinearizationDirection {
-    COLUMN=0,
-    MAIN_DIAG=1,
-    ANTI_DIAG=2
-};
 
 enum LinearizationOperation {
     TRANSPOSE=0,
@@ -84,9 +79,9 @@ linearization_table buildBitboardLinearizationTableAntiDiag()
 std::array<linearization_table, 3> buildLinearizationTables() {
     std::array<linearization_table, 3> linearizationTables;
 
-    linearizationTables[LinearizationDirection::COLUMN] = buildBitboardLinearizationTableColumn();
-    linearizationTables[LinearizationDirection::MAIN_DIAG] = buildBitboardLinearizationTableMainDiag();
-    linearizationTables[LinearizationDirection::ANTI_DIAG] = buildBitboardLinearizationTableAntiDiag();
+    linearizationTables[RayDirection::COLUMN] = buildBitboardLinearizationTableColumn();
+    linearizationTables[RayDirection::MAIN_DIAG] = buildBitboardLinearizationTableMainDiag();
+    linearizationTables[RayDirection::ANTI_DIAG] = buildBitboardLinearizationTableAntiDiag();
 
     return linearizationTables;
 }
