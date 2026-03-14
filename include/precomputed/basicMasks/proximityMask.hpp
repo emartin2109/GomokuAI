@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Config.hpp"
+#include "config.hpp"
 #include "define/typedef.hpp"
 #include "precomputed/values.hpp"
 

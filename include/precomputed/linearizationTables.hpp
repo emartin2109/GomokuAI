@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include "Config.hpp"
+#include "config.hpp"
 #include "define/typedef.hpp"
 #include "define/enums.hpp"
 #include "precomputed/values.hpp"

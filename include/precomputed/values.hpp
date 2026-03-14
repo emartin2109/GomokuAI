@@ -3,6 +3,6 @@
 #include <cmath>
 #include <unordered_map>
 
-#include "Config.hpp"
+#include "config.hpp"
 
 inline const size_t BOARD_LENGTH = sqrt(BOARD_SIZE);
