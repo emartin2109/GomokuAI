@@ -88,4 +88,3 @@ std::array<linearization_table, 3> buildLinearizationTables() {
 
 // WARNING ! This variable with not be able to compute correctly if the board size is 65536 (2^16) or more
 const inline std::array<linearization_table, 3> LINEARIZATION_TABLES = buildLinearizationTables();
-
