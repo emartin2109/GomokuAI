@@ -6,8 +6,8 @@
 #include <cmath>
 #include <iostream>
 
- std::array<std::tuple<threat_patern, encoded_threat_pattern>, 512> buildLineSplitMaskLookup() {
-     std::array<std::tuple<threat_patern, encoded_threat_pattern>, 512> lineSplitMask;
+ std::array<std::tuple<threat_patern, encoded_threat_pattern>, 512> buildLineSplitMaskTable() {
+     std::array<line_split_masks, 512> lineSplitTable;
 
     for (size_t i = 0; i < 512; i++) {
         threat_patern lineMask;
@@ -47,10 +47,10 @@
             lineMask.set(j);
         }
 
-        lineSplitMask[i] = {lineMask, lineMaskLimits};
+        lineSplitTable[i] = {lineMask, lineMaskLimits};
     }
 
-    return lineSplitMask;
+    return lineSplitTable;
 }
 
-inline const std::array<std::tuple<threat_patern, encoded_threat_pattern>, 512> LINE_SPLIT_MASK = buildLineSplitMaskLookup();
+inline const std::array<line_split_masks, 512> LINE_SPLIT_TABLE = buildLineSplitMaskTable();

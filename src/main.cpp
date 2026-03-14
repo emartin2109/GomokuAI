@@ -3,7 +3,7 @@
 #include "precomputed/linearizationTables.hpp"
 #include "precomputed/squareRaysLookup.hpp"
 #include "precomputed/basicMasks/proximityMask.hpp"
-#include "precomputed/threatPaterns/lineSplitMaskLookup.hpp"
+#include "precomputed/threatPaterns/lineSplitMaskTable.hpp"
 
 #include <iostream>
 
@@ -29,7 +29,7 @@ int main () {
     bitboard b(65536);
 
     std::cout << " " << threat_patern(0) << std::endl;
-    std::cout << " " << std::get<0>(LINE_SPLIT_MASK[0]) << "\n" << std::get<1>(LINE_SPLIT_MASK[0]) << std::endl;
+    std::cout << " " << std::get<0>(LINE_SPLIT_TABLE[0]) << "\n" << std::get<1>(LINE_SPLIT_TABLE[0]) << std::endl;
 
     /*
     for (size_t i = 0; i < BOARD_SIZE; i++) {
