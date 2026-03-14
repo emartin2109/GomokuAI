@@ -28,8 +28,8 @@
 int main () {
     bitboard b(65536);
 
-    std::cout << " " << threat_patern(138) << std::endl;
-    std::cout << " " << std::get<0>(LINE_SPLIT_MASK[138]) << "\n" << std::get<1>(LINE_SPLIT_MASK[138]) << std::endl;
+    std::cout << " " << threat_patern(0) << std::endl;
+    std::cout << " " << std::get<0>(LINE_SPLIT_MASK[0]) << "\n" << std::get<1>(LINE_SPLIT_MASK[0]) << std::endl;
 
     /*
     for (size_t i = 0; i < BOARD_SIZE; i++) {
